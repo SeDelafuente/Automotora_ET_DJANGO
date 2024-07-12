@@ -1,0 +1,28 @@
+{% extends "autos/base.html" %}
+
+{% load static %}
+
+{% block title %}Detalle del Auto{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card mb-4 shadow-sm">
+        <div class="row no-gutters">
+            <div class="col-md-6">
+                <img src="{% static car.image %}" class="img-fluid" alt="{{ car.model }}">
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <h2 class="card-title">{{ car.brand }} {{ car.model }}</h2>
+                    <p class="card-text">{{ car.description }}</p>
+                    <ul class="list-group list-group-flush mt-3">
+                        <li class="list-group-item"><strong>Año:</strong> {{ car.year }}</li>
+                        <li class="list-group-item"><strong>Precio:</strong> ${{ car.price }}</li>
+                    </ul>
+                    <a href="{% url 'add_to_cart' car.id %}" class="btn btn-success mt-3">Añadir al Carrito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

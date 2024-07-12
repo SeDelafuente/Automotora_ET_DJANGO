@@ -1,0 +1,38 @@
+{% extends "autos/base.html" %}
+
+{% load static %}
+{% load cart_extras %}
+
+{% block title %}Carrito de Compras{% endblock %}
+
+{% block content %}
+<h2>Carrito de Compras</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Auto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.car.brand }} {{ item.car.model }}</td>
+            <td>${{ item.car.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.car.price|multiply:item.quantity }}</td>
+            <td>
+                <a href="{% url 'remove_from_cart' item.car.id %}" class="btn btn-danger">-</a>
+                <a href="{% url 'add_to_cart' item.car.id %}" class="btn btn-success">+</a>
+                <a href="{% url 'remove_item_from_cart' item.car.id %}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p><strong>Total: ${{ total }}</strong></p>
+<a href="{% url 'checkout' %}" class="btn btn-primary">Comprar</a>
+{% endblock %}
