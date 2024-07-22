@@ -6,8 +6,8 @@ class Car(models.Model):
     model = models.CharField(max_length=100)
     year = models.IntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='cars/')
-    description = models.TextField()
+    image = models.ImageField(upload_to='cars/', default="image.png")
+    description = models.TextField(default="No hay una descripción disponible")
 
     def __str__(self):
         return f"{self.brand} {self.model}"
